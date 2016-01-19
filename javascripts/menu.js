@@ -62,7 +62,7 @@ function Menu(menuSize) {
 		var marginTop = page._firstItem.originalMarginTop;
 		
 		page._firstItem.style.marginTop = (page._currentPage > 1) ? 
-			page._multipleByPixels(page._getHeight(page._scrollUpButton), (page._currentPage - 1) * -1 * page._menuSize) :
+			page._multipleByPixels(page._itemHeight, (page._currentPage - 1) * -1 * page._menuSize) :
 			marginTop;
 		
 		page._isAbleToGoUp() ? page.removeClass(page._scrollUpButton, "scroll-tool-disabled") : page.addClass(page._scrollUpButton, "scroll-tool-disabled");
