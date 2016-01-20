@@ -2,4 +2,4 @@
 Create a menu faster.
 
 # Demo
-http://jsgao0.github.io/Menu/
+<a href="http://jsgao0.github.io/Menu/" target="_blank">http://jsgao0.github.io/Menu/</a>
