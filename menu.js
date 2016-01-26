@@ -4,21 +4,28 @@ function Menu(menuSize) {
 		return [].map.call(arguments, function(e){return e;})
 				.reduce(function(p, c, i) {
 					try {
-						return p + parseInt(c.replace("px"));
+						if(typeof c != "string") throw c + ' is not a pixel number.';
+						var num = c.replace(/px$/, "");
+						if(isNaN(num)) throw c + ' is not a pixel number.';
+						else return p + parseFloat(num);
 					} catch(e) {
-						return 0;
+						// console.log(e);
+						return p + 0;
 					}
 				}, 0) + "px";
 	};
 	this._multipleByPixels = function(val, multi) {
-		if(arguments.length != 2) return "0px";
-		var el;
+		if(arguments.length < 2) return "0px";
 		try {	
-			el = parseInt(val) * multi;
+			if(typeof val != "string") throw c + ' is not a pixel number.';
+			var num = val.replace(/px$/, "");
+			if(isNaN(num)) throw val + ' is not a pixel number.';
+			if(isNaN(multi)) throw multi + ' is not a number.';
+			num = parseFloat(val) * multi;
 		} catch(e) {
-			el = 0;
+			num = 0;
 		} finally {
-			return el + "px";
+			return num + "px";
 		}
 	};
 
@@ -140,3 +147,5 @@ function Menu(menuSize) {
 		ele.className = ele.className + " " + cls;
 	}
 }
+
+module.exports = Menu;
