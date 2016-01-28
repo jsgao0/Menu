@@ -1,8 +1,32 @@
 var assert = require('assert');
 var menu = require('../menu');
+var jsdom = require('jsdom');
+
+global.document = jsdom.jsdom(
+	'<!doctype html>' +
+	'<html>' +
+	'	<body>' +
+	'		<div class="menu-box">' +
+	'			<div class="scroll-tool scroll-up">Scroll Up</div>' +
+	'			<div class="scroll-box"></div>' +
+	'			<div class="scroll-tool scroll-down">Scroll Down</div>' +
+	'		</div>' +
+	'	</body>' +
+	'</html>'
+);
+
+global.window = document.defaultView;
 
 describe('Inner Tests', function() {
 	var menuObj = new menu(7);
+
+	var menuBox = document.getElementsByClassName("scroll-box")[0];
+	var itemList = [0,1,2,3,4,5,6,7,8,9,10];
+
+	menuObj.setScrollBox(menuBox, itemList);
+	menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
+	menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
+
 	describe('Test Function: _sumPixels(args[])', function () {
 		describe('should return 0 pixel', function() {
 			it('when there is no argument.', function() {
