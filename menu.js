@@ -41,17 +41,22 @@
         };
         this._totalItems = [];
         this._menuSize = menuSize;
-        this._getHeight = function(e) {
+        this._getHeight = function(e, withMargin) {
             var el;
             try {
                 var elStyle = window.getComputedStyle(e, null);
                 el = page._sumPixels(
                     elStyle.getPropertyValue('height'),
-                    elStyle.marginTop,
-                    elStyle.marginBottom,
-                    elStyle.getPropertyValue('padding-top'),
-                    elStyle.getPropertyValue('padding-bottom')
+                    elStyle.getPropertyValue('padding-top') || '0px',
+                    elStyle.getPropertyValue('padding-bottom') || '0px'
                 );
+                if(withMargin === true) {
+                    el = page._sumPixels(
+                        el,
+                        elStyle.marginTop || '0px',
+                        elStyle.marginBottom || '0px'
+                    );
+                }
             } catch(ee) {
                 el = ee.currentStyle.height;
             } finally {
