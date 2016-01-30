@@ -5,16 +5,11 @@
 	var jsdom = require('jsdom');
 
 	global.document = jsdom.jsdom(
-		'<!doctype html>' +
-		'<html>' +
-		'	<body>' +
-		'		<div class="menu-box">' +
-		'			<div class="scroll-tool scroll-up">Scroll Up</div>' +
-		'			<div class="scroll-box"></div>' +
-		'			<div class="scroll-tool scroll-down">Scroll Down</div>' +
-		'		</div>' +
-		'	</body>' +
-		'</html>'
+		'<div class="menu-box">' +
+		'	<div class="scroll-tool scroll-up">Scroll Up</div>' +
+		'	<div class="scroll-box"></div>' +
+		'	<div class="scroll-tool scroll-down">Scroll Down</div>' +
+		'</div>'
 	);
 
 	global.window = document.defaultView;
@@ -29,7 +24,7 @@
 		menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
 		menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
 
-		describe('Test Function: _sumPixels(args[])', function () {
+		describe('Test Function: _sumPixels(args[Pixel])', function () {
 			describe('should return 0 pixel', function() {
 				it('when there is no argument.', function() {
 					assert.equal('0px', menuObj._sumPixels());
@@ -74,7 +69,7 @@
 			});
 		});
 
-		describe('Test Function: _multipleByPixels(multiplicand, multiplier)', function () {
+		describe('Test Function: _multipleByPixels(multiplicand: Pixel, multiplier: Number)', function () {
 			describe('should return the product of the multiplication', function() {
 				it('when the multiplicand and the multiplier are both valid values.', function() {
 					assert.equal('40px', menuObj._multipleByPixels('20px', 2));
@@ -104,7 +99,30 @@
 			});
 		});
 
-		describe('_getHeight', function () {
+		describe('Test Function: _getHeight(blockElement: DOM, withMargin: Boolean)', function () {
+            // Haven't consider the height with the border width yet.
+            describe('should return the division\'s height', function() {
+                it('when there is no pandding or margin in the division.', function() {
+                    var div = document.createElement('div');
+                    div.style.height = "100px";
+                    assert.equal('100px', menuObj._getHeight(div));
+                });
+                it('when there are some paddings in the division.', function() {
+                    var div = document.createElement('div');
+                    div.style.height = "100px"; // Must includes the height if you'd like to set the paddings.
+                    div.style.padding = "5px";
+                    assert.equal('110px', menuObj._getHeight(div));
+                    div.style.paddingTop = "10px";
+                    assert.equal('115px', menuObj._getHeight(div));
+                    div.style.paddingBottom = "15px";
+                    assert.equal('125px', menuObj._getHeight(div));
+                });
+                it('when there are some margins surround the division.', function() {
+                    var div = document.createElement('div');
+                    div.style.margin = "10px";
+                    
+                });
+            });
 
 			//TODO
 		});
