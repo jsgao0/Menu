@@ -119,13 +119,20 @@
                 });
                 it('when there are some margins surround the division.', function() {
                     var div = document.createElement('div');
+                    div.style.height = "100px"; // Must includes the height if you'd like to set the margins.
                     div.style.margin = "10px";
-                    
+                    assert.equal('100px', menuObj._getHeight(div));
+                    assert.equal('120px', menuObj._getHeight(div, true));
+                    div.style.marginTop = "20px";
+                    assert.equal('100px', menuObj._getHeight(div));
+                    assert.equal('130px', menuObj._getHeight(div, true));
+                    div.style.marginBottom = "25px";
+                    assert.equal('100px', menuObj._getHeight(div));
+                    assert.equal('145px', menuObj._getHeight(div, true));
                 });
             });
-
-			//TODO
 		});
+        
 		describe('_isAbleToScroll', function () {
 			//TODO
 		});
