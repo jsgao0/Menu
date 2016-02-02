@@ -17,13 +17,6 @@
 	describe('Inner Tests', function() {
 		var menuObj = new menu(7);
 
-		var menuBox = document.getElementsByClassName("scroll-box")[0];
-		var itemList = [0,1,2,3,4,5,6,7,8,9,10];
-
-		menuObj.setScrollBox(menuBox, itemList);
-		menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
-		menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
-
 		describe('Test Function: _sumPixels(args[Pixel])', function () {
 			describe('should return 0 pixel', function() {
 				it('when there is no argument.', function() {
@@ -132,11 +125,27 @@
                 });
             });
 		});
-        
+
 		describe('_isAbleToScroll', function () {
-			//TODO
+            it('return false if you haven\'t set menuBox and itemList up.', function() {
+                assert.equal(false, menuObj._isAbleToScroll());
+            });
+            it('return true if you have set menuBox and itemList up.', function() {
+                var menuBox = document.getElementsByClassName("scroll-box")[0];
+                var itemList = [0,1,2,3,4,5,6,7,8,9,10];
+                menuObj.setScrollBox(menuBox, itemList);
+                assert.equal(true, menuObj._isAbleToScroll());
+            });
+            it('return false if you have set menuBox and itemList up but the item size less than menu size.', function() {
+                var menuBox = document.getElementsByClassName("scroll-box")[0];
+                var itemList = [0,1,2,3,4,5];
+                menuObj.setScrollBox(menuBox, itemList);
+                assert.equal(false, menuObj._isAbleToScroll());
+            });
 		});
 		describe('_isAbleToGoUp', function () {
+            menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
+            menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
 			//TODO
 		});
 		describe('_isAbleToGoDown', function () {
