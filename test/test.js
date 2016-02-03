@@ -15,9 +15,9 @@
 	global.window = document.defaultView;
 
 	describe('Inner Tests', function() {
-		var menuObj = new menu(7);
 
 		describe('Test Function: _sumPixels(args[Pixel])', function () {
+    		var menuObj = new menu(7);
 			describe('should return 0 pixel', function() {
 				it('when there is no argument.', function() {
 					assert.equal('0px', menuObj._sumPixels());
@@ -63,6 +63,7 @@
 		});
 
 		describe('Test Function: _multipleByPixels(multiplicand: Pixel, multiplier: Number)', function () {
+        	var menuObj = new menu(7);
 			describe('should return the product of the multiplication', function() {
 				it('when the multiplicand and the multiplier are both valid values.', function() {
 					assert.equal('40px', menuObj._multipleByPixels('20px', 2));
@@ -93,6 +94,7 @@
 		});
 
 		describe('Test Function: _getHeight(blockElement: DOM, withMargin: Boolean)', function () {
+            var menuObj = new menu(7);
             // Haven't consider the height with the border width yet.
             describe('should return the division\'s height', function() {
                 it('when there is no pandding or margin in the division.', function() {
@@ -127,11 +129,12 @@
 		});
 
 		describe('_isAbleToScroll', function () {
+            var menuObj = new menu(7);
+            var menuBox = document.getElementsByClassName("scroll-box")[0];
             it('return false if you haven\'t set menuBox and itemList up.', function() {
                 assert.equal(false, menuObj._isAbleToScroll());
             });
             it('return true if you have set menuBox and itemList up.', function() {
-                var menuBox = document.getElementsByClassName("scroll-box")[0];
                 var itemList = [0,1,2,3,4,5,6,7,8,9,10];
                 menuObj.setScrollBox(menuBox, itemList);
                 assert.equal(true, menuObj._isAbleToScroll());
@@ -144,12 +147,34 @@
             });
 		});
 		describe('_isAbleToGoUp', function () {
+            var menuObj = new menu(7);
+            var menuBox = document.getElementsByClassName("scroll-box")[0];
+            var itemList = [0,1,2,3,4,5,6,7,8,9,10];
+            menuObj.setScrollBox(menuBox, itemList);
             menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
             menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
-			//TODO
+            it('return false when the menu just be initialized(is at the first page).', function() {
+                assert.equal(false, menuObj._isAbleToGoUp());
+            });
+            it('return true when the menu is scrollable and is scrolled down at least once.', function() {
+                menuObj.pageDown();
+                assert.equal(true, menuObj._isAbleToGoUp());
+            });
 		});
 		describe('_isAbleToGoDown', function () {
-			//TODO
+            var menuObj = new menu(7);
+            var menuBox = document.getElementsByClassName("scroll-box")[0];
+            var itemList = [0,1,2,3,4,5,6,7,8,9,10];
+            menuObj.setScrollBox(menuBox, itemList);
+            menuObj.setScrollUpButton(document.getElementsByClassName("scroll-up")[0]);
+            menuObj.setScrollDownButton(document.getElementsByClassName("scroll-down")[0]);
+            it('return true when the menu just be initialized(is at the first page).', function() {
+                assert.equal(true, menuObj._isAbleToGoDown());
+            });
+            it('return false when the menu is at the last page.', function() {
+                menuObj.pageDown();
+                assert.equal(false, menuObj._isAbleToGoDown());
+            });
 		});
 	});
 })();
