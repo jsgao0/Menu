@@ -97,12 +97,12 @@
             var menuObj = new menu(7);
             // Haven't consider the height with the border width yet.
             describe('should return the division\'s height', function() {
-                it('when there is no pandding or margin in the division.', function() {
+                it('when there is no pandding, border, or margin in the division.', function() {
                     var div = document.createElement('div');
                     div.style.height = "100px";
                     assert.equal('100px', menuObj._getHeight(div));
                 });
-                it('when there are some paddings in the division.', function() {
+                it('when there is padding-top or padding-bottom in the division.', function() {
                     var div = document.createElement('div');
                     div.style.height = "100px"; // Must includes the height if you'd like to set the paddings.
                     div.style.padding = "5px";
@@ -112,7 +112,7 @@
                     div.style.paddingBottom = "15px";
                     assert.equal('125px', menuObj._getHeight(div));
                 });
-                it('when there are some margins surround the division.', function() {
+                it('when there is margin-top or margin-bottom surround the division.', function() {
                     var div = document.createElement('div');
                     div.style.height = "100px"; // Must includes the height if you'd like to set the margins.
                     div.style.margin = "10px";
