@@ -112,6 +112,16 @@
                     div.style.paddingBottom = "15px";
                     assert.equal('125px', menuObj._getHeight(div));
                 });
+                it('when there is border-top or border-bottom in the division.', function() {
+                    var div = document.createElement('div');
+                    div.style.height = "100px"; // Must includes the height if you'd like to set the paddings.
+                    div.style.border = "5px";
+                    assert.equal('110px', menuObj._getHeight(div));
+                    div.style.borderTop = "10px";
+                    assert.equal('115px', menuObj._getHeight(div));
+                    div.style.borderBottom = "15px";
+                    assert.equal('125px', menuObj._getHeight(div));
+                });
                 it('when there is margin-top or margin-bottom surround the division.', function() {
                     var div = document.createElement('div');
                     div.style.height = "100px"; // Must includes the height if you'd like to set the margins.

@@ -48,7 +48,9 @@
                 el = page._sumPixels(
                     elStyle.getPropertyValue('height'),
                     elStyle.getPropertyValue('padding-top') || '0px',
-                    elStyle.getPropertyValue('padding-bottom') || '0px'
+                    elStyle.getPropertyValue('padding-bottom') || '0px',
+                    elStyle.getPropertyValue('border-top') || '0px',
+                    elStyle.getPropertyValue('border-bottom') || '0px'
                 );
                 if(withMargin === true) {
                     el = page._sumPixels(
