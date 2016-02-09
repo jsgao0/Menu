@@ -149,7 +149,7 @@
             });
 		});
 
-		describe('_isAbleToScroll', function () {
+		describe('Test Function: _isAbleToScroll', function () {
             var menuObj = new menu(7);
             var menuBox = document.getElementsByClassName("scroll-box")[0];
             it('return false if you haven\'t set menuBox and itemList up.', function() {
@@ -167,7 +167,7 @@
                 assert.equal(false, menuObj._isAbleToScroll());
             });
 		});
-		describe('_isAbleToGoUp', function () {
+		describe('Test Function: _isAbleToGoUp', function () {
             var menuObj = new menu(7);
             var menuBox = document.getElementsByClassName("scroll-box")[0];
             var itemList = [0,1,2,3,4,5,6,7,8,9,10];
@@ -182,7 +182,7 @@
                 assert.equal(true, menuObj._isAbleToGoUp());
             });
 		});
-		describe('_isAbleToGoDown', function () {
+		describe('Test Function: _isAbleToGoDown', function () {
             var menuObj = new menu(7);
             var menuBox = document.getElementsByClassName("scroll-box")[0];
             var itemList = [0,1,2,3,4,5,6,7,8,9,10];
