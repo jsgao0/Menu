@@ -1,37 +1,6 @@
 (function() {
     "use strict";
     function Menu(menuSize) {
-        this._sumPixels = function() {
-            if(arguments.length === 0) return "0px";
-            return [].map.call(arguments, function(e){return e;})
-                    .reduce(function(p, c, i) {
-                        try {
-                            if(typeof c != "string") throw c + ' is not a pixel number.';
-                            var num = c.replace(/px$/, "");
-                            if(isNaN(num)) throw c + ' is not a pixel number.';
-                            else return p + parseFloat(num);
-                        } catch(e) {
-                            // console.log(e);
-                            return p + 0;
-                        }
-                    }, 0) + "px";
-        };
-        this._multipleByPixels = function(val, multi) {
-            if(arguments.length < 2) return "0px";
-            var num;
-            try {
-                if(typeof val != "string") throw val + ' is not a pixel number.';
-                num = val.replace(/px$/, "");
-                if(isNaN(num)) throw val + ' is not a pixel number.';
-                if(isNaN(multi)) throw multi + ' is not a number.';
-                num = parseFloat(val) * multi;
-            } catch(e) {
-                num = 0;
-            } finally {
-                return num + "px";
-            }
-        };
-
         var page = this;
         this.selectFunction = function(e, arr) {
             [].forEach.call(arr, function(ae) {
@@ -41,36 +10,7 @@
         };
         this._totalItems = [];
         this._menuSize = menuSize;
-        this._getHeight = function(e, withMargin) {
-            var el;
-            try {
-                var elStyle = window.getComputedStyle(e, null);
-                el = page._sumPixels(
-                    elStyle.getPropertyValue('height'),
-                    elStyle.getPropertyValue('padding-top') || '0px',
-                    elStyle.getPropertyValue('padding-bottom') || '0px',
-                    elStyle.getPropertyValue('border-top') || '0px',
-                    elStyle.getPropertyValue('border-bottom') || '0px'
-                );
-                if(withMargin === true) {
-                    el = page._sumPixels(
-                        el,
-                        elStyle.marginTop || '0px',
-                        elStyle.marginBottom || '0px'
-                    );
-                }
-            } catch(ee) {
-                el = ee.currentStyle.height;
-            } finally {
-                return el;
-            }
-        };
         this._currentPage = 1;
-        this._isInCurrentPage = function(index) {
-            if(!index) return false;
-            if(isNaN(index)) return false;
-            return page._currentPage === Math.ceil(index / page._menuSize);
-        };
         this.setCurrentPage = function(index) {
             page._currentPage = Math.ceil(index / page._menuSize) || 1;
         };
@@ -154,6 +94,64 @@
             if(page.hasClass(ele, cls)) return;
             ele.className = ele.className + " " + cls;
         };
+
+        this._getHeight = function(e, withMargin) {
+            var el;
+            try {
+                var elStyle = window.getComputedStyle(e, null);
+                el = page._sumPixels(
+                    elStyle.getPropertyValue('height'),
+                    elStyle.getPropertyValue('padding-top') || '0px',
+                    elStyle.getPropertyValue('padding-bottom') || '0px',
+                    elStyle.getPropertyValue('border-top') || '0px',
+                    elStyle.getPropertyValue('border-bottom') || '0px'
+                );
+                if(withMargin === true) {
+                    el = page._sumPixels(
+                        el,
+                        elStyle.marginTop || '0px',
+                        elStyle.marginBottom || '0px'
+                    );
+                }
+            } catch(ee) {
+                el = ee.currentStyle.height;
+            } finally {
+                return el;
+            }
+        };
+
+        this._sumPixels = function() {
+            if(arguments.length === 0) return "0px";
+            return [].map.call(arguments, function(e){return e;})
+                    .reduce(function(p, c, i) {
+                        try {
+                            if(typeof c != "string") throw c + ' is not a pixel number.';
+                            var num = c.replace(/px$/, "");
+                            if(isNaN(num)) throw c + ' is not a pixel number.';
+                            else return p + parseFloat(num);
+                        } catch(e) {
+                            // console.log(e);
+                            return p + 0;
+                        }
+                    }, 0) + "px";
+        };
+
+        this._multipleByPixels = function(val, multi) {
+            if(arguments.length < 2) return "0px";
+            var num;
+            try {
+                if(typeof val != "string") throw val + ' is not a pixel number.';
+                num = val.replace(/px$/, "");
+                if(isNaN(num)) throw val + ' is not a pixel number.';
+                if(isNaN(multi)) throw multi + ' is not a number.';
+                num = parseFloat(val) * multi;
+            } catch(e) {
+                num = 0;
+            } finally {
+                return num + "px";
+            }
+        };
+
     }
     module.exports = Menu;
 })();
