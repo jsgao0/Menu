@@ -82,7 +82,7 @@
         };
 
         this.hasClass = function(ele, cls) {
-            return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+            return ele.className.search(new RegExp('(\\s|^)'+cls+'(\\s|$)')) > -1;
         };
 
         this.removeClass = function(ele, cls) {
