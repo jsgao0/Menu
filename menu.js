@@ -58,7 +58,8 @@
             }, false);
             page._scrollDownButton = e;
         };
-        this.setScrollBox = function(menuBox, itemList) {
+        this.setScrollBox = function(menuBox, itemList, selectedIndex) {
+            selectedIndex = selectedIndex || 0;
             menuBox.innerHTML = itemList.reduce(function(p, c, i) {
                             return (i === 0) ?
                                     p + '<div class="menu-item menu-item-selected">' + c + '</div>' :
