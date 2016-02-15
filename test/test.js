@@ -16,6 +16,27 @@
 
 	describe('Inner Tests', function() {
 
+        describe('Test initialization', function() {
+            it('should set the inside parameters up when the Menu instance has been created.', function() {
+                var menuObj = new menu(7);
+                assert.equal(7, menuObj._menuSize);
+                assert.equal(1, menuObj._currentPage);
+                assert.deepEqual([], menuObj._totalItems);
+            });
+            it('should set the inside parameters up when the scroll box has been created.', function() {
+                var menuObj = new menu(7);
+                var menuBox = document.getElementsByClassName("scroll-box")[0];
+                var itemList = [0,1,2,3,4,5,6,1,2,3,4,5,6,7,8,9,10];
+                menuObj.setScrollBox(menuBox, itemList);
+                itemList.forEach(function(e, i) {
+                    var menuItem = document.getElementsByClassName("menu-item")[i];
+                    assert.equal(e, menuItem.innerHTML);
+                    if(i > 0) menuItem.click();
+                    assert.equal(true, menuObj.hasClass(menuItem, 'menu-item-selected'));
+                });
+            });
+        });
+
 		describe('Test Function: _sumPixels(args[Pixel])', function () {
     		var menuObj = new menu(7);
 			describe('should return 0 pixel', function() {
