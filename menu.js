@@ -61,7 +61,7 @@
         this.setScrollBox = function(menuBox, itemList, selectedIndex) {
             selectedIndex = selectedIndex || 0;
             menuBox.innerHTML = itemList.reduce(function(p, c, i) {
-                            return (i === 0) ?
+                            return (i === selectedIndex) ?
                                     p + '<div class="menu-item menu-item-selected">' + c + '</div>' :
                                     p + '<div class="menu-item">' + c + '</div>';
                         }, "");
