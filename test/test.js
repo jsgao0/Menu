@@ -34,6 +34,8 @@
                     if(i > 0) menuItem.click();
                     assert.equal(true, menuObj.hasClass(menuItem, 'menu-item-selected'));
                 });
+                assert.deepEqual(menuObj._totalItems[0], menuObj._firstItem);
+                assert.deepEqual(menuObj._totalItems.length, menuObj._altitude);
             });
         });
 
